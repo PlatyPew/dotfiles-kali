@@ -15,4 +15,9 @@ Uses i3-gaps
 Mod is `alt`/`option` key
 
 ## Screenshots
-Coming soon!
+![lock](screenshots/lock.png)
+![desktop](screenshots/desktop.png)
+![neofetch](screenshots/neofetch.png)
+![rofi](screenshots/rofi.png)
+![i3-gaps](screenshots/i3-gaps.png)
+![misc](screenshots/misc.png)
