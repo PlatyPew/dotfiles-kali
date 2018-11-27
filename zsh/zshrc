@@ -45,11 +45,20 @@ export VISUAL EDITOR=nvim
 export EDITOR
 
 weather() {
-    sed '38,39d' <(curl -s wttr.in/${1})
+    "sed '38,39d' <(curl -s wttr.in/${1})"
 }
 
 getip() {
     dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}'
+}
+
+fixlock() {
+    if [[ -z ${1} ]]; then
+        echo "You need to supply an image"
+    else
+        ~/.config/i3/betterlockscreen -u ${1}
+    fi
+
 }
 
 alias vi='nvim -O'

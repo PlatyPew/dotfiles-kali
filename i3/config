@@ -180,14 +180,8 @@ bar {
         font pango:Inconsolata Nerd Font Medium 10
         colors {
             separator #017196
-            background #002028
+            background #00242d
             statusline #268bd2
-
-            #colours           border  backgr. text
-            focused_workspace  #006488 #006488 #fdf6e3
-            active_workspace   #333333 #5f676a #fdf6e3
-            inactive_workspace #333333 #222222 #888888
-            urgent_workspace   #2f343a #900000 #fdf6e3
         }
 }
 
