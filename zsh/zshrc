@@ -44,14 +44,17 @@ VISUAL=nvim;
 export VISUAL EDITOR=nvim
 export EDITOR
 
+# Gets weather updates from online
 weather() {
     "sed '38,39d' <(curl -s wttr.in/${1})"
 }
 
+# Gets current ip
 getip() {
     dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}'
 }
 
+# Fixes lock screen background images
 fixlock() {
     if [[ -z ${1} ]]; then
         echo "You need to supply an image"
@@ -61,7 +64,30 @@ fixlock() {
 
 }
 
+# Python related stuff
+ve() {
+    if [[ -z ${VIRTUAL_ENV} ]]; then
+        if [[ ! -d venv ]]; then
+            virtualenv -p python3 venv
+        fi
+        source venv/bin/activate
+    fi
+}
+
+alias de='deactivate'
+
+alias pipr='pip install -r requirements.txt'
+alias pipr3='pip3 install -r requirements.txt'
+
+# Split screen in Neovim
 alias vi='nvim -O'
+
+# Lazy to write commit messages solver
 alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
+
+# Opens up gnome settings
 alias settings='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center </dev/null &>/dev/null &'
+
+# Runs rice related stuff
 alias f='ranger'
+alias s='rofi -modi run -show run -theme ~/.config/rofi/solarized-darker.rasi'
