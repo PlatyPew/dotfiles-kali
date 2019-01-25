@@ -1,118 +1,267 @@
-""" Platy's Neovim config
+""" Platy's Ultimate Neovim Config
 
-""" Vim-Plug
-call plug#begin()
+""" Vim-Plug -----------------------------------------------------------------
+call plug#begin()                                                       " Plugin manager Vim-Plug
 
-" Aesthetics
-Plug 'liuchengxu/space-vim-dark'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/vim-journal'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'junegunn/goyo.vim'
+"" Aesthetics
+Plug 'liuchengxu/space-vim-dark'                                        " Colour Scheme SpaceVimDark
+Plug 'vim-airline/vim-airline'                                          " Plugin that gives blocks on the top and bottom neovim
+Plug 'vim-airline/vim-airline-themes'                                   " Imports a library of themes for vim-arline
+Plug 'ryanoasis/vim-devicons'                                           " Allows for nerdfont icons to be displayed
+Plug 'junegunn/limelight.vim'                                           " Grey-out paragraphs the cursor is not on
+Plug 'junegunn/vim-journal'                                             " Nicer syntax highlighting for markdown
+Plug 'pangloss/vim-javascript'                                          " Nicer syntax highlighting for javascript
+Plug 'vim-python/python-syntax'                                         " Nicer syntax highlighting for python
+Plug 'junegunn/rainbow_parentheses.vim'                                 " Adds rainbow colouring for nested parenthesis
+Plug 'junegunn/goyo.vim'                                                " Distraction-free setting
+Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 
-" Functionalities
-Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/nerdtree'
-Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-scripts/LargeFile'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
+"" Functionalities
+Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
+Plug 'scrooloose/nerdtree'                                              " Shows file tree
+Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
+Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
+Plug 'zchee/deoplete-clang'                                             " Auto-Completion support for C/C++
+Plug 'zchee/deoplete-jedi'                                              " Auto-Completion support for Python
+Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g install tern'}          " Auto-Completion support for Javascript
+Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
+Plug 'tpope/vim-fugitive'                                               " Git wrapper
+Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
+Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
+Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8'} " Asynchronous linting
+Plug 'kien/ctrlp.vim'                                                   " Fuzzy finder
+Plug 'majutsushi/tagbar'
+Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g install esctags'} " Shows tags for javascript
+Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
 
 call plug#end()
+""" End Of Vim-Plug -----------------------------------------------------------
 
 
-""" Coloring
+""" Plugin Colouring ----------------------------------------------------------
 let g:space_vim_dark_background = 234
-syntax on
-colorscheme space-vim-dark
-highlight clear Comment
-highlight Comment cterm=italic guifg=#7c7c7c
-set number
+let g:python_highlight_all = 1
+let g:python_slow_sync = 0
+""" End Of Plugin Colouring ---------------------------------------------------
+
+
+""" Vanilla Colouring ---------------------------------------------------------
+syntax on                                                               " Enable syntax highlighting
 set termguicolors
+colorscheme space-vim-dark                                              " Set colour scheme SpaceVimDark
+highlight clear Comment
+" Set colours for comments
+highlight Comment cterm=italic guifg=#7c7c7c
+" Set colours for colour coloumn
+highlight ColorColumn guifg=#ff0000 guibg=NONE
 highlight Normal ctermbg=NONE guibg=NONE
 highlight LineNr ctermbg=NONE guibg=NONE
 highlight SignColumn ctermbg=NONE guibg=NONE
+""" End Of Vanilla Colouring --------------------------------------------------
 
 
-""" Other config
+""" Vanilla Configurations ----------------------------------------------------
+set number
 set encoding=UTF-8
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-set ai " Autoindent
-set si " Smartindent
-set wrap " Wrap lines
+set whichwrap+=<,>,h,l                                                  " Cursor wrap around in normal mode
+set autoindent
+set smartindent
+set wrap
 set tabstop=4 shiftwidth=4 
 set tabstop=4
 set softtabstop=4
-set expandtab
-set list listchars=tab:»·,trail:·,nbsp:·
+set expandtab                                                           " #spacemasterrace
+set list listchars=tab:»·,trail:·,nbsp:·                                " Show trailing spaces and hard tabs
 set cursorline
-set splitright
-" au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
-au TermOpen * setlocal nonumber norelativenumber
+set splitright                                                          " Set vertical split to always split to the right
+set clipboard=unnamed                                                   " Share yank and paste buffer with MacOS' pbcopy and pbpaste
+call matchadd('ColorColumn', '\%101v', 100)                             " Show colour coloumn only at lines that pass 101 characters
+""" End Of Vanilla Configurations ----------------------------------------------
 
 
-""" Optimisation config
+""" Optimisation ---------------------------------------------------------------
 set lazyredraw
 set ttyfast
 set foldmethod=syntax
 set foldmethod=expr
-set noshowcmd
+set showcmd
 set noruler
-" set eventignore=all " Uncommenting this line stops deoplete and gitgutter from working
+" set eventignore=all " Ultimate optimisation. Basically no plugins or anything run
+""" End Of Optimisation ---------------------------------------------------------
 
 
-""" Mappings
+""" Vanilla Rebindings -------------------------------------------------------
+"" Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
+" Increase horizontal split
+nnoremap <silent> <Up> :resize +2 <CR>
+vnoremap <silent> <Up> :resize +2 <CR>
+" Decrease horizontal split
+nnoremap <silent> <Down> :resize -2 <CR>
+vnoremap <silent> <Down> :resize -2 <CR>
+" Increase vertical split
+nnoremap <silent> <Left> :vertical resize -2 <CR>
+vnoremap <silent> <Left> :vertical resize -2 <CR>
+" Decrease horizontal split
+nnoremap <silent> <Right> :vertical resize +2 <CR>
+vnoremap <silent> <Right> :vertical resize +2 <CR>
 
-" Ctrl-o to open sidebar
-nmap <C-o> :NERDTreeToggle<CR>
-
-" Better window switching
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
+"" Better window switching
+" Move to pane on the left      Ctrl-h
 nmap <C-h> <C-W>h
+" Move to lower pane            Ctrl-j
+nmap <C-j> <C-W>j
+" Move to upper pane            Ctrl-j
+nmap <C-k> <C-W>k
+" Move to pane on the right     Ctrl-h
 nmap <C-l> <C-W>l
 
-" Better tab switching
-"nnoremap <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
-"nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
-nmap <C-t> :tabnew<CR>
+"" Better tab
+" Create new tabs    Ctrl-t
+nmap <silent><C-t> :tabnew<CR>
 
-" Activate rainbow parentheses \r
-nmap <leader>r :RainbowParentheses!!<CR>
+"" Remap semicolon to colon
+nnoremap ; :
+""" End Of Vanilla Rebindings -------------------------------------------------
 
-" Activate Limelight \l
+
+""" Vim-Airline Configurations ------------------------------------------------
+let g:airline_powerline_fonts = 1
+let g:airline_section_warning = ''
+let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
+let g:airline_theme='solarized_flood'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_solarized_bg='dark'
+""" End Of Vim-Airline Configurations -----------------------------------------
+
+
+""" Limelight Configurations --------------------------------------------------
+"" Mappings
+" Activate Limelight   \l
 nmap <leader>l :Limelight!!<CR>
 
-" Activate Goyo \G
-nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Normal ctermbg=NONE guibg=NONE <CR> :highlight LineNr ctermbg=NONE guibg=NONE <CR> :highlight SignColumn ctermbg=NONE guibg=NONE <CR>
+"" Colour
+let g:limelight_conceal_ctermfg = 254
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+""" End Of Limelight Configurations -------------------------------------------
 
-" Activate Deoplete \d
-nmap <leader>d :call deoplete#toggle()<CR>
 
-" Activate GitGutter \g
+""" Vim Journal Configurations ------------------------------------------------
+au BufNewFile,BufRead *.md set filetype=journal                         " Enable better syntax highlighting for .md files
+""" End Of Vim Journal Configurations -----------------------------------------
+
+
+""" Rainbow Parentheses Configurations ----------------------------------------
+"" Mappings
+" Activate Rainbow Parentheses    \r
+nmap <leader>r :RainbowParentheses!!<CR>
+
+"" Auto Commands
+au VimEnter * RainbowParentheses                                        " Enable Rainbow Parentheses by default
+""" End Of Rainbow Parentheses Configurations ---------------------------------
+
+
+""" Goyo Configurations -------------------------------------------------------
+"" Mappings
+" Activate Goyo    \G
+nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic guifg=#7c7c7c<CR>
+""" End Of Goyo Configurations ------------------------------------------------
+
+
+""" Git Gutter Configurations -------------------------------------------------
+"" Mappings
+" Activate GitGutter    \g
 nmap <leader>g :GitGutterToggle<CR> 
 
+"" Settings
+set updatetime=50                                                       " Update git gutter every 50ms
+" set signcolumn=yes
+" au VimEnter * GitGutterDisable
+""" End Of Git Gutter Configurations ------------------------------------------
+
+
+""" Nerd Tree Configurations --------------------------------------------------
+"" Mappings
+" Activate Nerd Tree    Ctrl-o
+nmap <C-o> :NERDTreeToggle<CR>
+
+"" Settings
+let NERDTreeShowHidden=1
+let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
+let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+""" End Of Nerd Tree Configurations -------------------------------------------
+
+
+""" Deoplete Configurations ---------------------------------------------------
+"" Mappings
+" Go down    Tab
+inoremap <silent><expr><tab>  pumvisible() ? "\<C-n>" : "\<tab>"
+" Go up      Shift-Tab
+inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
+
+"" Settings
+au InsertEnter * call deoplete#enable()
+set completeopt-=preview
+" C/C++
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
+let g:deoplete#sources#clang#sort_algo = 'priority'
+" JS
+let g:tern_request_timeout = 1
+let g:tern_request_timeout = 6000
+
+"" Colours
+highlight Pmenu guifg=#0bb5ed guibg=#000304
+highlight PmenuSel guifg=#ea2089 guibg=#054656
+""" End Of Deoplete Configurations --------------------------------------------
+
+
+""" Vim Fugitive Configurations -----------------------------------------------
+"" Mappings
+" Show git status    Tab
+nnoremap <silent> <leader>gs :Gstatus<CR>
+" Show git blame     Tab
+nnoremap <silent> <leader>gb :Gblame<CR>
+" Show git diff      Tab
+nnoremap <silent> <leader>gd :Gdiff<CR>
+""" End Of Vim Fugitive Configurations ----------------------------------------
+
+
+""" ALE Configurations --------------------------------------------------------
+"" Mappings
+" Activate ALE    \a
+nmap <leader>a :ALEToggle<CR>
+""" End Of ALE Configurations -------------------------------------------------
+
+
+""" Undo Tree Configurations --------------------------------------------------
+"" Mappings
+" Activate Undo Tree    Tab
+nmap <Tab> :UndotreeToggle<CR>
+
+"" Settings
+" Loads persistent undo tree to ~/.cache
+if has("persistent_undo")
+    set undodir=~/.cache/undotree
+    set undofile
+endif
+""" End Of UndoTree Configurations --------------------------------------------
+
+
+""" Tagbar Configurations -----------------------------------------------------
+"" Mappings
+" Activate Tabar    Shift-Tab
+nmap <S-Tab> :TagbarToggle<CR>
+""" End Of Tagbar Configurations ----------------------------------------------
+
+
+""" Vanilla Terminal Support --------------------------------------------------
+"" Mappings
 " Spawn shell \s
 nmap <leader>s :vsp \| term<CR> i
-
-" UndoTree
-nmap <C-i> :UndotreeToggle<CR>
-
-" Vim Fugitive
-nnoremap <silent> <leader>gp :Gpull -pr<CR>
-nnoremap <silent> <leader>gf :Gfetch -p<CR>
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-
 " Allow better window switching in terminal mode
 augroup vimrc_term
     autocmd!
@@ -124,39 +273,38 @@ augroup vimrc_term
     autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
     autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
 augroup END
-
-""" Vim Airline
-let g:airline_powerline_fonts = 1
-let g:airline_section_warning = ''
-let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
-let g:airline_theme='solarized_flood'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_solarized_bg='dark'
+""" End Of Vanilla Terminal Support ------------------------------------------
 
 
-""" Limelight
-let g:limelight_conceal_ctermfg = 254
-" Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
+""" Vanilla Transparent Mode -------------------------------------------------
+"" Mappings
+" Activate Transparent mode    \t
+nmap <leader>t :call ToggleTransparentMode()<CR>
 
-" Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
+"" Settings
+au TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
 
+"" Functions
+function SetTransparentBackground()
+    highlight Normal ctermbg=NONE guibg=NONE
+    highlight LineNr ctermbg=NONE guibg=NONE
+    highlight SignColumn ctermbg=NONE guibg=NONE
+endfunction
 
-""" Rainbow Parentheses
-" au VimEnter * RainbowParentheses " Enable Rainbow Parentheses by default
+function UnsetTransparentBackground()
+    colorscheme space-vim-dark
+    highlight Comment cterm=italic guifg=#7c7c7c
+    highlight clear Comment
+endfunction
 
-
-""" Git Gutter
-" set signcolumn=yes
-" au VimEnter * GitGutterDisable
-set updatetime=50
-
-
-""" NERD Tree
-let NERDTreeShowHidden=1
-let g:NERDTreeDirArrowExpandable = '↠'
-let g:NERDTreeDirArrowCollapsible = '↡'
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let s:transparent = 0
+function ToggleTransparentMode()
+    if s:transparent
+        call UnsetTransparentBackground()
+        let s:transparent = 0
+    else
+        call SetTransparentBackground()
+        let s:transparent = 1
+    endif
+endfunction
+""" End Of Vanilla Transparent Mode -------------------------------------------
