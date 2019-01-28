@@ -1,0 +1,3 @@
+- link:
+        ~/.config/gtk-3.0/gtk.css: configs/gtk-3.0/gtk.css
+        ~/.config/gtk-3.0/settings.ini: configs/gtk-3.0/settings.ini

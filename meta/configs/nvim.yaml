@@ -1,0 +1,4 @@
+- link:
+        ~/.eslintrc.json: configs/nvim/.eslintrc.json
+        ~/.tern-config: configs/nvim/.tern-config
+        ~/.config/nvim/init.vim: configs/nvim/init.vim

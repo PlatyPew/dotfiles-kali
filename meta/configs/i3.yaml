@@ -1,0 +1,7 @@
+- link:
+        ~/.config/i3/betterlockscreen: configs/i3/betterlockscreen
+        ~/.config/i3/clipboard_fix.sh: configs/i3/clipboard_fix.sh
+        ~/.config/i3/config: configs/i3/config
+        ~/.config/i3/i3blocks.conf: configs/i3/i3blocks.conf
+        ~/.config/i3/lockscreen: configs/i3/lockscreen
+        ~/.config/i3/random_wallpaper.sh: configs/i3/random_wallpaper.sh
