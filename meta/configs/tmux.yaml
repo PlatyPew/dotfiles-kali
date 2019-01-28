@@ -1,4 +1,2 @@
 - link:
-        ~/.config/tmux/getLocalIP.sh: configs/tmux/getLocalIP.sh
-        ~/.config/tmux/getPublicIP.sh: configs/tmux/getPublicIP.sh
         ~/.tmux.conf: configs/tmux/.tmux.conf

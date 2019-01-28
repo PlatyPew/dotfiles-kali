@@ -186,7 +186,7 @@ bar {
 }
 
 # i3-lock
-bindsym $mod+x exec ~/.config/i3/betterlockscreen -l
+bindsym $mod+x exec ~/.dotfiles/configs/i3/betterlockscreen -l
 
 # i3-gaps
 for_window [class="^.*"] border pixel 3
@@ -194,12 +194,12 @@ gaps inner 12
 gaps outer 8
 
 # Fix VM copy pasta
-exec --no-startup-id ~/.config/i3/clipboard_fix.sh
+exec --no-startup-id ~/.dotfiles/configs/i3/clipboard_fix.sh
 # Set a random wallpaper everytime you restart i3
-exec --no-startup-id ~/.config/i3/random_wallpaper.sh
+exec --no-startup-id ~/.dotfiles/configs/i3/random_wallpaper.sh
 # Set keyboard repeat to go faster
 exec --no-startup-id xset r rate 200 30
 # Compton
 exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
 # Login screen
-exec --no-startup-id ~/.config/i3/betterlockscreen -l
+exec --no-startup-id ~/.dotfiles/configs/i3/betterlockscreen -l
