@@ -1,0 +1,3 @@
+- link:
+        ~/.zshrc: configs/zsh/.zshrc
+        ~/.oh-my-zsh/custom/themes/agnoster-custom.zsh-theme: configs/zsh/agnoster-custom.zsh-theme
