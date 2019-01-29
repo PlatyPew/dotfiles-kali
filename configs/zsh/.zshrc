@@ -14,8 +14,12 @@ plugins=(
     git
     zsh-completions
     zsh-syntax-highlighting
-    zsh-autosuggestions
     colored-man-pages
+    vi-mode
+    web-search
+    sudo
+    tmux
+    extract
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -59,7 +63,7 @@ fixlock() {
     if [[ -z ${1} ]]; then
         echo "You need to supply an image"
     else
-        ~/.config/i3/betterlockscreen -u ${1}
+        ~/.dotfiles/configs/i3/betterlockscreen -u ${1}
     fi
 
 }
@@ -69,8 +73,30 @@ ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
             virtualenv -p python3 venv
+            source venv/bin/activate
+            pip3 install --upgrade neovim
+        else
+            source venv/bin/activate
         fi
-        source venv/bin/activate
+    else
+        echo "You are already in a virtual environment"
+        return 1
+    fi
+}
+
+howdafak() {
+    if [ -z ${1} ]; then
+        echo "Usage:    ${0} [-l] <topic> [query]"
+        echo "Example:  ${0} c \"get string length\""
+        echo "          ${0} python \"~file\" # Uses keyword \"file\""
+        echo "          ${0} -l # Shows list of all topics"
+        return 1
+    elif [ ${1} = "-l" ]; then
+        curl -s "https://cht.sh/:list" | grep -v '[/:]' | xargs -s 100 | tr " " "\t"
+    else
+        topic=${1}
+        shift
+        time curl -s "https://cht.sh/${topic}/${*}/i"
     fi
 }
 
@@ -85,9 +111,16 @@ alias vi='nvim -O'
 # Lazy to write commit messages solver
 alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
 
-# Opens up gnome settings
-alias settings='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center </dev/null &>/dev/null &'
-
 # Runs rice related stuff
 alias f='ranger'
 alias s='rofi -modi run -show run -theme ~/.config/rofi/solarized-darker.rasi'
+
+# Better searching in command mode
+bindkey -M vicmd '?' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-forward
+
+# Beginning search with arrow keys
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
+bindkey -M vicmd "k" up-line-or-beginning-search
+bindkey -M vicmd "j" down-line-or-beginning-search
