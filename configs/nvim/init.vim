@@ -42,7 +42,7 @@ Plug 'scrooloose/nerdcommenter'                                         " Easy c
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8'}                                                                   " Asynchronous linting
-Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
+Plug 'majutsushi/tagbar', {'do': 'apt-get install -y exuberant-ctags'}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g install esctags'} " Shows tags for javascript
 
 call plug#end()
