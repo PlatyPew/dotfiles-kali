@@ -334,7 +334,7 @@ function UnsetTransparentBackground()
     highlight clear Comment
 endfunction
 
-let s:transparent = 0
+let s:transparent = 1
 function ToggleTransparentMode()
     if s:transparent
         call UnsetTransparentBackground()
