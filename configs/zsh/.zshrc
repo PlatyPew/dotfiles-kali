@@ -44,6 +44,9 @@ export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64"
 export TERM="xterm-256color"
+if [[ ! -z $TMUX ]] then
+    export TERM="screen-256color"
+fi
 VISUAL=nvim;
 export VISUAL EDITOR=nvim
 export EDITOR
