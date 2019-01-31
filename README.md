@@ -1,23 +1,33 @@
 # Kali Linux
-Uses i3 window manager
+Dotfiles for Kali Linux using the i3 window manager.
 
-All files are to be placed in `~/.config`
+Deployed using [dotbot](https://github.com/anishathalye/dotbot).
+Use the `install-standalone` command.
 
-For `tmux/tmux.conf`, `zsh/zshrc` and `git/gitignore`, copy or create a soft link to `~`
+```bash
+# Example (Creates a soft link from dotfiles repository to ~/.config/i3)
+./install-standalone i3
+```
 
-Set i3 as default window manager, and allow autologin on Kali.
+Options include:
+- compton
+- git
+- gtk
+- i3
+- nvim
+- ranger
+- rofi
+- termite
+- tmux
+- zsh
 
-Set termite as default terminal
-
-## i3
-Uses i3-gaps
-
-Mod is `alt`/`option` key
+## Notice
+As I was too lazy to make the soft linking dynamic, it is important that this repo is in called `.dotfiles` and placed in the home folder.
+You can do this by doing `git clone https://github.com/PlatyPew/dotfiles-kali ~/.dotfiles`
 
 ## Screenshots
-![lock](screenshots/lock.png)
+![moneyshot](screenshots/moneyshot.png)
+![lockscreen](screenshots/lockscreen.png)
 ![desktop](screenshots/desktop.png)
-![neofetch](screenshots/neofetch.png)
-![rofi](screenshots/rofi.png)
-![i3-gaps](screenshots/i3-gaps.png)
-![misc](screenshots/misc.png)
+![workflow](screenshots/workflow.png)
+![navigation](screenshots/navigation.png)
