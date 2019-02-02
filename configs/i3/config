@@ -13,7 +13,7 @@ set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Inconsolata Nerd Font Medium 10
+font pango:Inconsolata Nerd Font Medium 11
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -135,7 +135,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -162,11 +162,11 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-#colors:                border  backgr. text    ind.
+# colors:               border  backgr. text    ind.
 client.focused          #017196 #017196 #ffffff #017196
-client.focused_inactive #888888 #222222 #ffffff #222222
-client.unfocused        #888888 #222222 #ffffff #222222
-client.urgent           #900000 #900000 #ffffff #900000
+client.focused_inactive #00242d #00242d #c4c4c4 #222222
+client.unfocused        #00242d #00242d #c4c4c4 #222222
+client.urgent           #eb709b #eb709b #ffffff #eb709b
 
 bindsym $mod+r mode "resize"
 
@@ -179,13 +179,13 @@ bar {
         height 26
         font pango:Inconsolata Nerd Font Medium 10
         colors {
-            separator #017196
-            background #00242d
-            statusline #268bd2
-            focused_workspace #003644 #003644 #f1f1f1
-            active_workspace #003644 #00242d #888888
+            separator          #017196
+            background         #00242d
+            statusline         #268bd2
+            focused_workspace  #003644 #003644 #f1f1f1
+            active_workspace   #003644 #00242d #888888
             inactive_workspace #00242d #00242d #f1f1f1
-            urgent_workspace #eb709b #eb709b #054656
+            urgent_workspace   #eb709b #eb709b #054656
         }
 }
 
