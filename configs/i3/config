@@ -194,7 +194,7 @@ bindsym $mod+x exec ~/.dotfiles/configs/i3/betterlockscreen -l
 
 # i3-gaps
 for_window [class="^.*"] border pixel 3
-gaps inner 12
+gaps inner 8
 gaps outer 8
 
 # Fix VM copy pasta
