@@ -12,7 +12,6 @@ Plug 'vim-airline/vim-airline-themes'                                   " Import
 Plug 'ryanoasis/vim-devicons'                                           " Allows for nerdfont icons to be displayed
 Plug 'junegunn/limelight.vim', {'on': 'Limelight!!'}                    " Grey-out paragraphs the cursor is not on
 Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
-Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 " Syntax highlighting
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}                   " Nicer syntax highlighting for javascript
@@ -38,6 +37,7 @@ Plug 'jiangmiao/auto-pairs'                                             " Insert
 Plug 'shime/vim-livedown', {'do': 'npm -g install livedown', 'on': 'LivedownToggle'} " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'scrooloose/nerdcommenter'                                         " Easy commenting
+Plug 'anyakichi/vim-surround'
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
@@ -88,6 +88,7 @@ set cursorline
 set splitright                                                          " Set vertical split to always split to the right
 set clipboard=unnamed                                                   " Share yank and paste buffer with MacOS' pbcopy and pbpaste
 call matchadd('ColorColumn', '\%101v[^\n]')                             " Show colour coloumn only at lines that pass 101 characters
+set noshowmode
 """ End Of Vanilla Configurations ----------------------------------------------
 
 
@@ -164,13 +165,6 @@ nmap <leader>r :RainbowParentheses!!<CR>
 "" Auto Commands
 au VimEnter * RainbowParentheses                                        " Enable Rainbow Parentheses by default
 """ End Of Rainbow Parentheses Configurations ---------------------------------
-
-
-""" Goyo Configurations -------------------------------------------------------
-"" Mappings
-" Activate Goyo    \G
-nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic guifg=#7c7c7c<CR>
-""" End Of Goyo Configurations ------------------------------------------------
 
 
 """ Git Gutter Configurations -------------------------------------------------
@@ -302,37 +296,3 @@ augroup vimrc_term
     autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
 augroup END
 """ End Of Vanilla Terminal Support ------------------------------------------
-
-
-""" Vanilla Transparent Mode -------------------------------------------------
-"" Mappings
-" Activate Transparent mode    \t
-nmap <leader>t :call ToggleTransparentMode()<CR>
-
-"" Settings
-au TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
-
-"" Functions
-function SetTransparentBackground()
-    highlight Normal ctermbg=NONE guibg=NONE
-    highlight LineNr ctermbg=NONE guibg=NONE
-    highlight SignColumn ctermbg=NONE guibg=NONE
-endfunction
-
-function UnsetTransparentBackground()
-    colorscheme space-vim-dark
-    highlight Comment cterm=italic guifg=#7c7c7c
-    highlight clear Comment
-endfunction
-
-let s:transparent = 1
-function ToggleTransparentMode()
-    if s:transparent
-        call UnsetTransparentBackground()
-        let s:transparent = 0
-    else
-        call SetTransparentBackground()
-        let s:transparent = 1
-    endif
-endfunction
-""" End Of Vanilla Transparent Mode -------------------------------------------

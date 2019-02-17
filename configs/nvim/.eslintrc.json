@@ -1,15 +1,9 @@
 {
-    "extends": "standard",
+    "extends": "google",
+    "env": {
+        "es6": true
+    },
     "rules": {
-        "semi": [1, "always"],
-        "indent": [1, 4],
-        "object-curly-spacing": [1, "never"],
-        "space-before-function-paren": [1, "never"],
-        "no-unused-vars": [1, {
-            "vars": "all", "args": "after-used", "ignoreRestSiblings": false
-        }],
-        "prefer-promise-reject-errors": [0, {
-            "allowEmptyReject": true
-        }]
+        "indent": [2, 4]
     }
 }
