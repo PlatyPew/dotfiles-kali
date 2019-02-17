@@ -15,9 +15,9 @@ Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds r
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 " Syntax highlighting
-Plug 'junegunn/vim-journal'                                             " Nicer syntax highlighting for markdown
-Plug 'pangloss/vim-javascript'                                          " Nicer syntax highlighting for javascript
-Plug 'vim-python/python-syntax'                                         " Nicer syntax highlighting for python
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}                   " Nicer syntax highlighting for javascript
+Plug 'vim-python/python-syntax', {'for': 'python'}                      " Nicer syntax highlighting for python
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}          " Nicer highlighting for clang
 
 "" Functionalities
 " Git
@@ -29,9 +29,9 @@ Plug 'kien/ctrlp.vim'                                                   " Fuzzy 
 " Auto-completion
 Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
-Plug 'zchee/deoplete-clang'                                             " Auto-Completion support for C/C++
-Plug 'zchee/deoplete-jedi'                                              " Auto-Completion support for Python
-Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g install tern'}          " Auto-Completion support for Javascript
+Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
+Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
+Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g install tern', 'for': 'javascript'} " Auto-Completion support for Javascript
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
@@ -41,7 +41,7 @@ Plug 'scrooloose/nerdcommenter'                                         " Easy c
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8'}                                                                   " Asynchronous linting
+Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-google; pip3 install flake8'} " Asynchronous linting
 Plug 'majutsushi/tagbar', {'do': 'apt-get install -y exuberant-ctags'}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g install esctags'} " Shows tags for javascript
 
@@ -127,10 +127,6 @@ nmap <C-k> <C-W>k
 " Move to pane on the right     Ctrl-h
 nmap <C-l> <C-W>l
 
-"" Better tab
-" Create new tabs    Ctrl-t
-nmap <silent><C-t> :tabnew<CR>
-
 "" Remap semicolon to colon
 nnoremap ; :
 """ End Of Vanilla Rebindings -------------------------------------------------
@@ -158,11 +154,6 @@ let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 """ End Of Limelight Configurations -------------------------------------------
-
-
-""" Vim Journal Configurations ------------------------------------------------
-au BufNewFile,BufRead *.md set filetype=journal                         " Enable better syntax highlighting for .md files
-""" End Of Vim Journal Configurations -----------------------------------------
 
 
 """ Rainbow Parentheses Configurations ----------------------------------------
