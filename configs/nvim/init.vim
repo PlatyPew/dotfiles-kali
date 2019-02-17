@@ -50,9 +50,17 @@ call plug#end()
 
 
 """ Plugin Colouring ----------------------------------------------------------
+"" Space Vim Dark
 let g:space_vim_dark_background = 234
+"" Python
 let g:python_highlight_all = 1
 let g:python_slow_sync = 0
+"" Clang
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
 """ End Of Plugin Colouring ---------------------------------------------------
 
 
@@ -128,8 +136,28 @@ nmap <C-k> <C-W>k
 " Move to pane on the right     Ctrl-h
 nmap <C-l> <C-W>l
 
+"" Better tab
+" Create new tabs    \t
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>th :tabfirst<CR>
+nnoremap <leader>tj :tabNext<CR>
+nnoremap <leader>tk :tabprevious<CR>
+nnoremap <leader>tl :tablast<CR>
+nnoremap <leader>tq :tabclose<CR>
+
+"" Easy Save
+" Save files    Ctrl-s
+imap <C-s> <Esc>:w<CR>a
+
 "" Remap semicolon to colon
 nnoremap ; :
+
+"" Cycling buffers
+nnoremap <leader>bh :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR>
+nnoremap <leader>bj :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR>
+nnoremap <leader>bk :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR>
+nnoremap <leader>bl :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR>
+nnoremap <leader>bq :bdelete<CR>
 """ End Of Vanilla Rebindings -------------------------------------------------
 
 
@@ -163,7 +191,11 @@ let g:limelight_conceal_guifg = '#777777'
 nmap <leader>r :RainbowParentheses!!<CR>
 
 "" Auto Commands
-au VimEnter * RainbowParentheses                                        " Enable Rainbow Parentheses by default
+augroup rainbow_lisp
+    autocmd!
+    autocmd VimEnter * RainbowParentheses
+augroup END
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 """ End Of Rainbow Parentheses Configurations ---------------------------------
 
 
@@ -185,11 +217,21 @@ set updatetime=50                                                       " Update
 nmap <C-o> :NERDTreeToggle<CR>
 
 "" Settings
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
 let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
 let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden = 0
+augroup nerdtree_stuff
+    autocmd!
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 """ End Of Nerd Tree Configurations -------------------------------------------
+
+
+""" CtrlP Configurations ------------------------------------------------------
+"" Settings
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+""" End Of Ctrlp Configurations -----------------------------------------------
 
 
 """ Deoplete Configurations ---------------------------------------------------
@@ -278,6 +320,37 @@ let g:NERDCustomDelimiters = {
     \ 'python': { 'left': '#', 'right': '' }
     \ }                                                                 " Fix for double spacing while commenting Python
 """ End Of Nerd Commenter Configurations --------------------------------------
+
+
+""" Multiple Cursors Configurations -------------------------------------------
+"" Functions
+" Disable Deoplete when selecting multiple cursors starts
+function! Multiple_cursors_before()
+    if exists('*deoplete#disable')
+        exe 'call deoplete#disable()'
+    elseif exists(':NeoCompleteLock') == 2
+        exe 'NeoCompleteLock'
+    endif
+endfunction
+
+" Enable Deoplete when selecting multiple cursors ends
+function! Multiple_cursors_after()
+    if exists('*deoplete#toggle')
+        exe 'call deoplete#toggle()'
+    elseif exists(':NeoCompleteUnlock') == 2
+        exe 'NeoCompleteUnlock'
+    endif
+endfunction
+""" End Of Multiple Cursors Configurations ------------------------------------
+
+
+""" Autopairs Configurations --------------------------------------------------
+"" Settings
+augroup quote_pair
+    autocmd!
+    autocmd FileType vim :let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'", "`":"`", '```':'```', "'''":"'''"}
+augroup END
+""" End Of Autopairs Configurations -------------------------------------------
 
 
 """ Vanilla Terminal Support --------------------------------------------------
