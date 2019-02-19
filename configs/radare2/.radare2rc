@@ -1,0 +1,4 @@
+e cmd.stack = true
+eco monokai
+e scr.utf8 = true
+e scr.utf8.curvy = true

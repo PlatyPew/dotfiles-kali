@@ -20,6 +20,7 @@ plugins=(
     sudo
     tmux
     extract
+    autojump
 )
 
 source $ZSH/oh-my-zsh.sh

@@ -4,5 +4,3 @@
         create: true
 
 - clean: ['~']
-- link:
-    ~/.dotfiles: ''
