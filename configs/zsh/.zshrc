@@ -112,9 +112,6 @@ alias pipr3='pip3 install -r requirements.txt'
 # Split screen in Neovim
 alias vi='nvim -O'
 
-# Lazy to write commit messages solver
-alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
-
 # Runs rice related stuff
 alias f='ranger'
 alias s='rofi -modi run -show run -theme ~/.config/rofi/solarized-darker.rasi'
