@@ -76,7 +76,7 @@ fixlock() {
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
-            virtualenv -p python3 venv
+            virtualenv -p python2 --system-site-packages venv
             source venv/bin/activate
             pip3 install --upgrade neovim
         else

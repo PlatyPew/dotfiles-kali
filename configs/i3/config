@@ -30,7 +30,7 @@ font pango:Inconsolata Nerd Font Medium 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite -e /bin/zsh
 
 # kill focused window
 bindsym $mod+Shift+q kill
