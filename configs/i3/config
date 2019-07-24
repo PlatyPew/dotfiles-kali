@@ -191,7 +191,7 @@ bar {
 }
 
 # i3-lock
-bindsym $mod+x exec ~/.dotfiles/configs/i3/betterlockscreen -l
+bindsym $mod+x exec ~/.config/i3/betterlockscreen -l blur -r 1366x768
 
 # i3-gaps
 for_window [class="^.*"] border pixel 3
@@ -200,6 +200,11 @@ gaps outer 0
 
 # TURN OFF COMPUTER:
 bindsym $mod+shift+x exec shutdown now
+
+# VOLUME
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # SHORTCUT FOR SOFTWARES:
 bindsym $mod+F2 exec termite -e "ranger"
@@ -210,7 +215,7 @@ bindsym $mod+F5 exec discord
 bindsym $mod+F9 exec termite -e "nmtui"
 bindsym $mod+F10 exec termite -e "bash"
 
-bindsym $mod+o exec termite -e "cmatrix"
+bindsym $mod+o exec termite -e "hollywood"
 bindsym $mod+p exec termite -e "curl parrot.live"
 
 
@@ -221,6 +226,6 @@ exec --no-startup-id ~/.dotfiles/configs/i3/random_wallpaper.sh
 # Set keyboard repeat to go faster
 exec --no-startup-id xset r rate 200 30
 # Compton
-exec --no-startup-id compton -b --config ~/.config/compton/compton.conf
+exec --no-startup-id compton -b --config ~/.dotfiles/configs/compton/compton.conf
 # Login screen
-exec --no-startup-id ~/.dotfiles/configs/i3/betterlockscreen -l
+exec --no-startup-id ~/.dotfiles/configs/i3/betterlockscreen -l blur -r 1366x768
