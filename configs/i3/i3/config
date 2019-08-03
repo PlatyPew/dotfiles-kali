@@ -212,7 +212,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # SHORTCUT FOR SOFTWARES:
 bindsym $mod+F2 exec termite -e "ranger"
-bindsym $mod+F3 exec chromium
+bindsym $mod+F3 exec "chromium --no-sandbox"
 bindsym $mod+F4 exec code --user-data-dir 
 bindsym $mod+F5 exec discord
 
