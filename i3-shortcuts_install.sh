@@ -1,1 +1,1 @@
-cp configs/* ~/.config/
+cp -r configs/* ~/.config/
